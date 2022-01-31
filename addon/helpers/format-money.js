@@ -12,8 +12,10 @@ export function formatMoney(params, namedArgs) {
   }
 
   let currencyHidden = null;
+  let decimalPlaces = null;
   if(namedArgs){
     currencyHidden = namedArgs.currencyHidden;
+    decimalPlaces = namedArgs.decimalPlaces;
   }
 
   let amount = moneyValue.amount;
@@ -23,7 +25,7 @@ export function formatMoney(params, namedArgs) {
     currencyValue = DEFAULT_CURRENCY;
   }
 
-  let amountFormatted = formatMoneyAmountByCurrency(amount, currencyValue, currencyHidden);
+  let amountFormatted = formatMoneyAmountByCurrency(amount, currencyValue, decimalPlaces, currencyHidden);
 
   return amountFormatted;
 }

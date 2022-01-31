@@ -1,5 +1,5 @@
-import { module, test } from 'qunit';
 import { formatMoney } from 'ember-currencies-and-format-money/helpers/format-money';
+import { module, test } from 'qunit';
 
 module('unit: helper: format-money');
 
@@ -20,4 +20,9 @@ test('defaultCurrency (TRY) works', function(assert) {
 test('currencyHidden works', function(assert) {
   let result = formatMoney([{amount: 142524, currency: 'USD'}], {'currencyHidden':true});
   assert.equal(result, '1,425.24');
+});
+
+test('decimalPlaces works', function(assert) {
+  let result = formatMoney([{amount: 142524, currency: 'USD'}], {'decimalPlaces':0});
+  assert.equal(result, '1,425');
 });
