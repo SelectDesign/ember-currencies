@@ -22,7 +22,7 @@ test('currencyHidden works', function(assert) {
   assert.equal(result, '1,425.24');
 });
 
-test('decimalPlaces works', function(assert) {
-  let result = formatMoney([{amount: 142524, currency: 'USD'}], {'decimalPlaces':0});
-  assert.equal(result, '1,425');
+test('hideCents works', function(assert) {
+  let result = formatMoney([{amount: 142524, currency: 'USD'}], {'hideCents':true});
+  assert.equal(result, '$1,425');
 });

@@ -11,11 +11,16 @@ export function formatMoney(params, namedArgs) {
     return undefined;
   }
 
-  let currencyHidden = null;
-  let decimalPlaces = null;
-  if(namedArgs){
-    currencyHidden = namedArgs.currencyHidden;
-    decimalPlaces = namedArgs.decimalPlaces;
+  let currencyHidden = false;
+  let hideCents = false;
+
+  if (namedArgs) {
+    if(namedArgs.currencyHidden){
+      currencyHidden = namedArgs.currencyHidden;
+    } 
+    if(namedArgs.hideCents){
+      hideCents = namedArgs.hideCents;
+    }
   }
 
   let amount = moneyValue.amount;
@@ -25,7 +30,7 @@ export function formatMoney(params, namedArgs) {
     currencyValue = DEFAULT_CURRENCY;
   }
 
-  let amountFormatted = formatMoneyAmountByCurrency(amount, currencyValue, decimalPlaces, currencyHidden);
+  let amountFormatted = formatMoneyAmountByCurrency(amount, currencyValue, hideCents, currencyHidden);
 
   return amountFormatted;
 }

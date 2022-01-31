@@ -3,8 +3,7 @@ import { isBlank } from '@ember/utils';
 
 import { currenciesObject } from './currencies';
 
-export function formatMoneyAmount(amount, digitSeparator, decimalSeparator, currencyPlacement, symbol, smallestUnitRatio, decimalPlaces, currencyHidden){
-
+export function formatMoneyAmount(amount, digitSeparator, decimalSeparator, currencyPlacement, symbol, smallestUnitRatio, hideCents, currencyHidden){
   let amountFinal = amount / smallestUnitRatio;
   let powerOfTen = Math.log(smallestUnitRatio) * Math.LOG10E;
 
@@ -23,10 +22,15 @@ export function formatMoneyAmount(amount, digitSeparator, decimalSeparator, curr
   else{
     result = symbol + amountFinal;
   }
-  return result;
+
+  if (hideCents) {
+    return result.split('.')[0];
+  } else {
+    return result;
+  }
 }
 
-export function formatMoneyAmountByCurrency(amount, currencyValue, decimalPlaces, currencyHidden){
+export function formatMoneyAmountByCurrency(amount, currencyValue, hideCents, currencyHidden){
 
   let currency = currenciesObject[currencyValue];
 
@@ -40,5 +44,5 @@ export function formatMoneyAmountByCurrency(amount, currencyValue, decimalPlaces
   let symbol = currency.symbol;
   let smallestUnitRatio = currency.smallestUnitRatio;
 
-  return formatMoneyAmount(amount, digitSeparator, decimalSeparator, currencyPlacement, symbol, smallestUnitRatio, decimalPlaces, currencyHidden);
+  return formatMoneyAmount(amount, digitSeparator, decimalSeparator, currencyPlacement, symbol, smallestUnitRatio, hideCents, currencyHidden);
 }
